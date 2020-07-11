@@ -1,0 +1,12 @@
+.immi-body {
+    &-slider-left {
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    &-content {
+        background-color: #fff;
+        margin: 0 24px;
+        padding: 1rem;
+    }
+}
