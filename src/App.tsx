@@ -5,8 +5,9 @@ import { BrowserRouter } from "react-router-dom";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import Body, { RouteCollection } from "./components/layout/Body";
-import Home from "./modules/Home";
-import FileManagement from "./modules/FileManagement";
+import Home from "./modules/home/Home";
+import FileManagement from "./modules/file-management/FileManagement";
+import { GlobalState } from "./context/GlobalContext";
 
 const routeCollection: RouteCollection = [
     {
@@ -22,13 +23,14 @@ const routeCollection: RouteCollection = [
 ];
 
 const App: React.FC = () => (
-    //https://github.com/ReactTraining/react-router/blob/v6.0.0-beta.0/docs/api-reference.md
     <BrowserRouter>
-        <Layout className="immi">
-            <Header />
-            <Body routeCollection={routeCollection} />
-            <Footer />
-        </Layout>
+        <GlobalState>
+            <Layout className="immi">
+                <Header />
+                <Body routeCollection={routeCollection} />
+                <Footer />
+            </Layout>
+        </GlobalState>
     </BrowserRouter>
 );
 
