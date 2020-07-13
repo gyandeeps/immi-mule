@@ -7,7 +7,7 @@ import Footer from "./components/layout/Footer";
 import Body, { RouteCollection } from "./components/layout/Body";
 import Home from "./modules/home/Home";
 import FileManagement from "./modules/file-management/FileManagement";
-import { GlobalState } from "./context/GlobalContext";
+import AllStateContext from "./context/AllStateContext";
 
 const routeCollection: RouteCollection = [
     {
@@ -24,13 +24,13 @@ const routeCollection: RouteCollection = [
 
 const App: React.FC = () => (
     <BrowserRouter>
-        <GlobalState>
+        <AllStateContext>
             <Layout className="immi">
                 <Header />
                 <Body routeCollection={routeCollection} />
                 <Footer />
             </Layout>
-        </GlobalState>
+        </AllStateContext>
     </BrowserRouter>
 );
 
