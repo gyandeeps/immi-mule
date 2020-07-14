@@ -3,8 +3,8 @@ import "./FileManagement.scss";
 import Empty from "../../components/empty/Empty";
 import { useTitle } from "react-use";
 import Files from "../../components/files/Files";
-import { useFiles } from "../../context/FilesContext";
-import AddFile from "../../components/files/AddFile";
+import { useFiles } from "../../state/files/FilesContext";
+import AddFile from "../../components/files/add/AddFile";
 
 const FileManagement: React.FC = () => {
     const { files, addFile, removeFile, fileTypes } = useFiles();

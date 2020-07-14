@@ -7,7 +7,7 @@ import Footer from "./components/layout/Footer";
 import Body, { RouteCollection } from "./components/layout/Body";
 import Home from "./modules/home/Home";
 import FileManagement from "./modules/file-management/FileManagement";
-import AllStateContext from "./context/AllStateContext";
+import AllStateContext from "./state/AllStateContext";
 import Case from "./modules/case/Case";
 import { HomeOutlined, FileOutlined, BankOutlined } from "@ant-design/icons";
 

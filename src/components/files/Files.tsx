@@ -1,15 +1,10 @@
 import React from "react";
 import { List } from "antd";
 import File from "./File";
+import { FilesDataType } from "../../types/file-types";
 
 type FilesProps = {
-    data: Map<
-        string,
-        {
-            title: string;
-            fileUrl: string;
-        }
-    >;
+    data: Map<string, FilesDataType>;
     onDelete: (id: string) => void;
 };
 

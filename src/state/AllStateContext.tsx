@@ -1,6 +1,6 @@
 import React from "react";
 import { GlobalState } from "./GlobalContext";
-import { FilesState } from "./FilesContext";
+import { FilesState } from "./files/FilesContext";
 
 const AllStateContext: React.FC = ({ children }) => (
     <GlobalState>
