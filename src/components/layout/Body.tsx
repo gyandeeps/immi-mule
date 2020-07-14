@@ -1,7 +1,6 @@
 import React from "react";
 import { Layout, Menu } from "antd";
 import "./Body.scss";
-import { UserOutlined } from "@ant-design/icons";
 import { Routes, Route, Link, useLocation } from "react-router-dom";
 
 const { Content, Sider } = Layout;
@@ -9,6 +8,7 @@ const { Content, Sider } = Layout;
 export type RouteCollection = {
     title: string;
     Component: React.FC;
+    Icon: React.FC;
     href: string;
 }[];
 
@@ -27,9 +27,9 @@ const AppBody: React.FC<AppBodyProps> = ({ routeCollection }) => {
                     selectedKeys={[location.pathname]}
                     style={{ height: "100%", borderRight: 0 }}
                 >
-                    {routeCollection.map((r) => (
-                        <Menu.Item icon={<UserOutlined />} key={r.href}>
-                            <Link to={r.href}>{r.title}</Link>
+                    {routeCollection.map(({ Icon, href, title }) => (
+                        <Menu.Item icon={<Icon />} key={href}>
+                            <Link to={href}>{title}</Link>
                         </Menu.Item>
                     ))}
                 </Menu>

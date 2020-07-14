@@ -7,13 +7,15 @@ import { useFiles } from "../../context/FilesContext";
 import AddFile from "../../components/files/AddFile";
 
 const FileManagement: React.FC = () => {
-    const { files, addFile, removeFile } = useFiles();
+    const { files, addFile, removeFile, fileTypes } = useFiles();
 
     useTitle("Immigration Mule: Files");
 
     return (
         <div className="immi-file-management">
-            <AddFile onUpload={addFile} />
+            <div>
+                <AddFile fileTypes={fileTypes} onUpload={addFile} />
+            </div>
             {files.size > 0 ? (
                 <Files onDelete={removeFile} data={files} />
             ) : (

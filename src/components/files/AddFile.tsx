@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { Upload, Button, Modal, Input } from "antd";
 import { UploadOutlined, InboxOutlined } from "@ant-design/icons";
+import { FileTypesEnum } from "../../context/FilesContext";
 
 type AddFileProps = {
     onUpload: (file: File) => void;
+    fileTypes: Set<FileTypesEnum>;
 };
 
 const AddFile: React.FC<AddFileProps> = ({ onUpload }) => {
-    const [isModalOpen, changeModelOpen] = useState(true);
+    const [isModalOpen, changeModelOpen] = useState(false);
     const [currentFile, setCurrentFile] = useState<null | File>(null);
-    const [fileName, setFileName] = useState<string>("");
+    const [fileName, setFileName] = useState("");
 
     const flipModelState = () => {
         changeModelOpen(!isModalOpen);
@@ -35,7 +37,6 @@ const AddFile: React.FC<AddFileProps> = ({ onUpload }) => {
             <Button onClick={flipModelState}>
                 <UploadOutlined /> Click to Upload
             </Button>
-
             <Modal
                 title="Add files"
                 visible={isModalOpen}

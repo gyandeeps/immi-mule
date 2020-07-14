@@ -8,17 +8,27 @@ import Body, { RouteCollection } from "./components/layout/Body";
 import Home from "./modules/home/Home";
 import FileManagement from "./modules/file-management/FileManagement";
 import AllStateContext from "./context/AllStateContext";
+import Case from "./modules/case/Case";
+import { HomeOutlined, FileOutlined, BankOutlined } from "@ant-design/icons";
 
 const routeCollection: RouteCollection = [
     {
         title: "Home",
         href: "/",
-        Component: Home
+        Component: Home,
+        Icon: HomeOutlined
+    },
+    {
+        title: "Cases",
+        href: "/case",
+        Component: Case,
+        Icon: BankOutlined
     },
     {
         title: "Files",
         href: "/files",
-        Component: FileManagement
+        Component: FileManagement,
+        Icon: FileOutlined
     }
 ];
 

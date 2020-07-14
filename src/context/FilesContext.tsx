@@ -26,8 +26,20 @@ const filesData: FilesDataType = new Map([
     ]
 ]);
 
+/// TODO - const enum not working
+export enum FileTypesEnum {
+    PASSPORT = "PASSPORT",
+    H1B_VISA = "H1B_VISA"
+}
+
+const fileTypes = new Set<FileTypesEnum>([
+    FileTypesEnum.PASSPORT,
+    FileTypesEnum.H1B_VISA
+]);
+
 const defaultState = {
-    files: filesData
+    files: filesData,
+    fileTypes
 };
 
 type RemoveFileAction = {
@@ -88,7 +100,7 @@ export const FilesState: React.FC = ({ children }) => {
 };
 
 export const useFiles = () => {
-    const [{ files }, dispatch] = useContext(FilesContext);
+    const [state, dispatch] = useContext(FilesContext);
 
     const addFile = (file: File) =>
         dispatch({
@@ -102,5 +114,5 @@ export const useFiles = () => {
             payload: id
         });
 
-    return { files, addFile, removeFile };
+    return { ...state, addFile, removeFile };
 };
