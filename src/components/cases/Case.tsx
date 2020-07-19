@@ -1,20 +1,15 @@
 import React from "react";
 import { List, Button, Tooltip, Spin } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
-import { FilesDataType } from "../../types/file-types";
+import { CaseType } from "../../types/case-types";
 import { TransactionStatus } from "../../types/general";
 
-type FileProps = {
+type CaseProps = {
     id: string;
     onDelete: (id: string) => void;
-} & FilesDataType;
+} & CaseType;
 
-const File: React.FC<FileProps> = ({
-    fileName,
-    transactionStatus,
-    onDelete,
-    id
-}) => {
+const Case: React.FC<CaseProps> = ({ id, transactionStatus, onDelete }) => {
     return (
         <Spin
             spinning={transactionStatus === TransactionStatus.INPROGRESS}
@@ -33,10 +28,10 @@ const File: React.FC<FileProps> = ({
                     </Tooltip>
                 ]}
             >
-                <List.Item.Meta title={fileName} />
+                <List.Item.Meta title={id} />
             </List.Item>
         </Spin>
     );
 };
 
-export default File;
+export default Case;

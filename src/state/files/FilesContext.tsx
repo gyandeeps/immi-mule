@@ -4,15 +4,15 @@ import {
     FileTransactionType,
     FileTypesEnum,
     FilesDataType,
-    TransactionStatus,
     ReducerActions
 } from "../../types/file-types";
+import { TransactionStatus } from "../../types/general";
 
 const filesData = new Map<string, FilesDataType>([
     [
         "1",
         {
-            title: "Ant Design Title 1",
+            fileName: "Ant Design Title 1",
             fileUrl: "Ant Design Title 1",
             transactionStatus: TransactionStatus.SUCCESS,
             transactionType: FileTransactionType.ADD
@@ -21,7 +21,7 @@ const filesData = new Map<string, FilesDataType>([
     [
         "2",
         {
-            title: "Ant Design Title 2",
+            fileName: "Ant Design Title 2",
             fileUrl: "Ant Design Title 2",
             transactionStatus: TransactionStatus.SUCCESS,
             transactionType: FileTransactionType.ADD
@@ -58,7 +58,6 @@ const reducers: Reducer<typeof defaultState, ReducerActions> = (
             const { file, ...otherAttr } = action.payload;
             newFiles.set(file.name, {
                 fileUrl: file.name,
-                title: file.name,
                 ...otherAttr,
                 transactionType: FileTransactionType.ADD,
                 transactionStatus: TransactionStatus.INPROGRESS

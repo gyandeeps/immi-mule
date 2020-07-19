@@ -1,16 +1,12 @@
+import { TransactionStatus } from "./general";
+
 export enum FileTransactionType {
     ADD = "ADD",
     DELETE = "DELETE"
 }
 
-export enum TransactionStatus {
-    INPROGRESS = "INPROGRESS",
-    SUCCESS = "SUCCESS",
-    FAILURE = "FAILURE"
-}
-
 export type FilesDataType = {
-    title: string;
+    fileName: string;
     fileUrl: string;
     transactionType: FileTransactionType;
     transactionStatus: TransactionStatus;
@@ -49,5 +45,6 @@ export enum FileTypesEnum {
 export type FileAttributes = {
     file: File;
     type: FileTypesEnum;
+    fileName: string;
     [key: string]: any;
 };

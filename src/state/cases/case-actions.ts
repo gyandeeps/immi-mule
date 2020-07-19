@@ -1,33 +1,33 @@
 import { Dispatch } from "react";
-import { FileAttributes, ReducerActions } from "../../types/file-types";
+import { CaseAddType, ReducerActions } from "../../types/case-types";
 import { TransactionStatus } from "../../types/general";
 
 const delay = (time = 5000) => new Promise((res) => setTimeout(res, time));
 
-export const addFileFn = (dispatch: Dispatch<ReducerActions>) => async (
-    attr: FileAttributes
+export const addCaseFn = (dispatch: Dispatch<ReducerActions>) => async (
+    attr: CaseAddType
 ) => {
     dispatch({
-        type: "ADD_FILE",
+        type: "ADD_CASE",
         payload: attr
     });
 
     await delay();
 
     dispatch({
-        type: "FILE_STATUS",
+        type: "CASE_STATUS",
         payload: {
-            id: attr.file.name,
+            id: attr.caseId,
             transactionStatus: TransactionStatus.SUCCESS
         }
     });
 };
 
-export const removeFileFn = (dispatch: Dispatch<ReducerActions>) => async (
+export const removeCaseFn = (dispatch: Dispatch<ReducerActions>) => async (
     id: string
 ) => {
     dispatch({
-        type: "FILE_STATUS",
+        type: "CASE_STATUS",
         payload: {
             id,
             transactionStatus: TransactionStatus.INPROGRESS
@@ -36,7 +36,7 @@ export const removeFileFn = (dispatch: Dispatch<ReducerActions>) => async (
     await delay();
 
     dispatch({
-        type: "REMOVE_FILE",
+        type: "REMOVE_CASE",
         payload: id
     });
 };
