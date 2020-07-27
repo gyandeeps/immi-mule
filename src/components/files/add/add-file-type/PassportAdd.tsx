@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Input, Upload, Form, Modal, DatePicker } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
 import { FileAttributes, FileTypesEnum } from "../../../../types/file-types";
+import { UploadFile } from "antd/lib/upload/interface";
 
 type PassportAddProps = {
     isModalOpen: boolean;
@@ -15,6 +16,7 @@ const PassportAdd: React.FC<PassportAddProps> = ({
     onUpload
 }) => {
     const [form] = Form.useForm();
+    const [fileList, updateFileList] = useState<UploadFile | null>(null);
 
     const onSubmit = () =>
         form
@@ -89,21 +91,30 @@ const PassportAdd: React.FC<PassportAddProps> = ({
                         ]}
                     >
                         <Upload.Dragger
-                            showUploadList={false}
-                            customRequest={(request) => {
+                            beforeUpload={(file) => {
+                                updateFileList(file);
                                 if (
                                     !form.getFieldValue("fileName") ||
                                     form.getFieldValue("fileName").length === 0
                                 ) {
-                                    const [
-                                        ,
-                                        ...nameArr
-                                    ] = request.file.name.split(".").reverse();
+                                    const [, ...nameArr] = file.name
+                                        .split(".")
+                                        .reverse();
                                     form.setFieldsValue({
                                         fileName: nameArr.join("")
                                     });
                                 }
+                                return false;
                             }}
+                            onRemove={() => {
+                                updateFileList(null);
+                                form.setFieldsValue({
+                                    fileName: "",
+                                    file: null
+                                });
+                                return false;
+                            }}
+                            fileList={fileList ? [fileList] : []}
                         >
                             <p className="ant-upload-drag-icon">
                                 <InboxOutlined />

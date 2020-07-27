@@ -10,6 +10,12 @@ import FileManagement from "./modules/file-management/FileManagement";
 import AllStateContext from "./state/AllStateContext";
 import Case from "./modules/case-management/CaseManagement";
 import { HomeOutlined, FileOutlined, BankOutlined } from "@ant-design/icons";
+import * as firebase from "firebase/app";
+import Auth from "./firebase/Auth";
+import { useUser } from "./firebase/hooks";
+import firebaseConfig from "./firebase/config";
+
+firebase.initializeApp(firebaseConfig);
 
 const routeCollection: RouteCollection = [
     {
@@ -32,16 +38,22 @@ const routeCollection: RouteCollection = [
     }
 ];
 
-const App: React.FC = () => (
-    <BrowserRouter>
-        <AllStateContext>
-            <Layout className="immi">
-                <Header />
-                <Body routeCollection={routeCollection} />
-                <Footer />
-            </Layout>
-        </AllStateContext>
-    </BrowserRouter>
-);
+const App: React.FC = () => {
+    const user = useUser();
+
+    return (
+        <BrowserRouter>
+            <AllStateContext>
+                <Auth>
+                    <Layout className="immi">
+                        <Header user={user} />
+                        <Body routeCollection={routeCollection} />
+                        <Footer />
+                    </Layout>
+                </Auth>
+            </AllStateContext>
+        </BrowserRouter>
+    );
+};
 
 export default App;
