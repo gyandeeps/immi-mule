@@ -15,7 +15,12 @@ import Auth from "./firebase/Auth";
 import { useUser } from "./firebase/hooks";
 import firebaseConfig from "./firebase/config";
 
-firebase.initializeApp(firebaseConfig);
+// In dev, sometimes I dont want to unnecessarily hit firebase services.
+const skipFirebase = process.env.NODE_ENV === "development";
+
+if (!skipFirebase) {
+    firebase.initializeApp(firebaseConfig);
+}
 
 const routeCollection: RouteCollection = [
     {
@@ -44,7 +49,7 @@ const App: React.FC = () => {
     return (
         <BrowserRouter>
             <AllStateContext>
-                <Auth>
+                <Auth skipAuth={skipFirebase}>
                     <Layout className="immi">
                         <Header user={user} />
                         <Body routeCollection={routeCollection} />

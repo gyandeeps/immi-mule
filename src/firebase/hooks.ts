@@ -5,7 +5,10 @@ export const useUser = () => {
     const [user, setUser] = useState<User | null>(null);
 
     useEffect(() => {
-        app().auth().onAuthStateChanged(setUser);
+        try {
+            // Sometimes in dev i want to disable login
+            app().auth().onAuthStateChanged(setUser);
+        } catch {}
     }, []);
 
     return user;

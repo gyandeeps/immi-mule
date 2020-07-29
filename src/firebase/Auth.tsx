@@ -3,7 +3,11 @@ import firebase from "firebase/app";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import { useUser } from "./hooks";
 
-const Auth: React.FC = ({ children }) => {
+type AuthProps = {
+    skipAuth?: boolean;
+};
+
+const Auth: React.FC<AuthProps> = ({ children, skipAuth = false }) => {
     const user = useUser();
 
     const uiConfig = {
@@ -17,7 +21,7 @@ const Auth: React.FC = ({ children }) => {
         }
     };
 
-    return user ? (
+    return user || skipAuth ? (
         <>{children}</>
     ) : (
         <StyledFirebaseAuth
